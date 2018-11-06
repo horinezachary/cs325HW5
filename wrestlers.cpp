@@ -61,7 +61,7 @@ int main(){
     }
     if (firstCaseLine){  //number of wrestlers
       W = stoi(parsedRow.at(0));
-      cout << W << endl;
+      //cout << W << endl;
       firstCaseLine = false;
       wnum = 0;
     }
@@ -69,7 +69,6 @@ int main(){
       Wrestler temp;
       temp.id = wnum;
       temp.name = removeNonLetters(parsedRow.at(0));
-      cout << temp.id << " " << temp.name << endl;
       temp.team = NONE;
       temp.length = 0;
       temp.visited = false;
@@ -79,27 +78,17 @@ int main(){
     else if (wnum == W){//number of rivalries
       wnum++;
       R = stoi(parsedRow.at(0));
-      cout << R << endl;
+      //cout << R << endl;
       rnum = 0;
     }
     else if (rnum < R) {
       string x = removeNonLetters(parsedRow.at(0));
       string y = removeNonLetters(parsedRow.at(1));
-      cout <<"---"<< x.at(0) << " " << y.at(0) << endl;
       int wx;
       int wy;
       for (int i = 0; i < W; i++){
-        cout << i << " " << wrestlers.at(i).name;
-        //printf("%d\n", wrestlers.at(i).name.at(1));
-        if (wrestlers.at(i).name.compare(x) == 0){
-          wx = i;
-          cout <<" "<< wx;
-        }
-        if (wrestlers.at(i).name.compare(y) == 0){
-          wy = i;
-          cout <<" "<< wy;
-        }
-        cout << endl;
+        if (wrestlers.at(i).name.compare(x) == 0){wx = i;}
+        if (wrestlers.at(i).name.compare(y) == 0){wy = i;}
       }
       rivA.push_back(wx);
       rivB.push_back(wy);
