@@ -14,6 +14,7 @@ struct Wrestler {
   string name;
 };
 
+void BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start);
 string removeNonLetters(string str);
 
 int main(){
@@ -27,7 +28,7 @@ int main(){
   bool firstCaseLine = true;
 
   vector<Wrestler> wrestlers;
-  int V;
+  int W;
   int wnum;
   int R;
   int rnum;
@@ -43,12 +44,12 @@ int main(){
       //cout << cell;
     }
     if (firstCaseLine){  //number of wrestlers
-      V = stoi(parsedRow.at(0));
-      cout << V << endl;
+      W = stoi(parsedRow.at(0));
+      cout << W << endl;
       firstCaseLine = false;
       wnum = 0;
     }
-    else if (wnum < V){  //wrestler names
+    else if (wnum < W){  //wrestler names
       Wrestler temp;
       temp.id = wnum;
       temp.name = removeNonLetters(parsedRow.at(0));
@@ -56,7 +57,7 @@ int main(){
       wrestlers.push_back(temp);
       wnum++;
     }
-    else if (wnum == V){//number of rivalries
+    else if (wnum == W){//number of rivalries
       wnum++;
       R = stoi(parsedRow.at(0));
       cout << R << endl;
@@ -68,7 +69,7 @@ int main(){
       cout <<"---"<< x.at(0) << " " << y.at(0) << endl;
       int wx;
       int wy;
-      for (int i = 0; i < V; i++){
+      for (int i = 0; i < W; i++){
         cout << i << " " << wrestlers.at(i).name;
         //printf("%d\n", wrestlers.at(i).name.at(1));
         if (wrestlers.at(i).name.compare(x) == 0){
@@ -85,8 +86,10 @@ int main(){
       wrestlers.at(wy).adj.push_back(wrestlers.at(wx).id);
       rnum++;
     }
-
   }
+
+  BreadthFirstSearch(wrestlers, W, 0)
+
   cout << fileout;
 
   //Write string to file
@@ -98,6 +101,10 @@ int main(){
   }
   outfile << fileout;
   outfile.close();
+
+}
+
+void BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start){
 
 }
 
