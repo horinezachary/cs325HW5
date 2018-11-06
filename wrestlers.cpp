@@ -106,9 +106,23 @@ int main(){
 
   wrestlers = BreadthFirstSearch(wrestlers, W, 0);
   wrestlers = sortTeams(wrestlers, W);
-
   if (checkTeams(wrestlers, W, rivA, rivB)){
       fileout.append("\nPossible: YES");
+      string bstr = "\nBABYFACES:";
+      string hstr = "\nHEELS:";
+      for (int i = 0; i < W; i++){
+        if (wrestlers.at(i).team == BABY){
+          bstr.append(" ");
+          bstr.append(wrestlers.at(i).name);
+        }
+        else if (wrestlers.at(i).team == HEEL){
+          hstr.append(" ");
+          hstr.append(wrestlers.at(i).name);
+        }
+      }
+      fileout.append(bstr);
+      fileout.append(hstr);
+  }
   else {fileout.append("\nPossible: NO");}
   cout << fileout << endl;
 
