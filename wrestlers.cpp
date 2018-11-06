@@ -57,11 +57,9 @@ int main(){
     vector<string> parsedRow;
     while(getline(lineStream,cell,' ')){  //parses line and puts numbers into string vector
       parsedRow.push_back(cell);
-      //cout << cell;
     }
     if (firstCaseLine){  //number of wrestlers
       W = stoi(parsedRow.at(0));
-      //cout << W << endl;
       firstCaseLine = false;
       wnum = 0;
     }
@@ -78,7 +76,6 @@ int main(){
     else if (wnum == W){//number of rivalries
       wnum++;
       R = stoi(parsedRow.at(0));
-      //cout << R << endl;
       rnum = 0;
     }
     else if (rnum < R) {  //read in rivalries, set them in each of the wrestler structs
@@ -141,7 +138,6 @@ vector<Wrestler> BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start
 
   while(!queue.empty()) { //work through all of the rivalries of the current wrestler becore going deeper.
     int currentindex = queue.front();
-    //cout << currentindex << " ";
     queue.erase(queue.begin()); //pop the top index off of the stack
     Wrestler current = wrestlers.at(currentindex);
 
