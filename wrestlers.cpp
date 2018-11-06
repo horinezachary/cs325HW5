@@ -13,6 +13,9 @@ struct Wrestler {
   vector<int> adj;
   string name;
 };
+
+string removeNonLetters(string str);
+
 int main(){
   ifstream inFile;  //set up the file reader and attempt to read the file
   inFile.open("wrestler.txt");
@@ -60,6 +63,27 @@ int main(){
       rnum = 0;
     }
     else if (rnum < R) {
+      string x = removeNonLetters(parsedRow.at(0));
+      string y = removeNonLetters(parsedRow.at(1));
+      cout <<"---"<< x.at(0) << " " << y.at(0) << endl;
+      int wx;
+      int wy;
+      for (int i = 0; i < V; i++){
+        cout << i << " " << wrestlers.at(i).name;
+        //printf("%d\n", wrestlers.at(i).name.at(1));
+        if (wrestlers.at(i).name.compare(x) == 0){
+          wx = i;
+          cout <<" "<< wx;
+        }
+        if (wrestlers.at(i).name.compare(y) == 0){
+          wy = i;
+          cout <<" "<< wy;
+        }
+        cout << endl;
+      }
+      wrestlers.at(wx).adj.push_back(wrestlers.at(wy).id);
+      wrestlers.at(wy).adj.push_back(wrestlers.at(wx).id);
+      rnum++;
     }
 
   }
@@ -75,4 +99,11 @@ int main(){
   outfile << fileout;
   outfile.close();
 
+}
+
+string removeNonLetters(string str) {
+  while (str.back() == '\n' || str.back() == '\r'){
+    str.pop_back();
+  }
+  return str;
 }
