@@ -8,13 +8,20 @@
 
 using namespace std;
 
+const int NONE = 0;
+const int BABY = 1;
+const int HEEL = 2;
+
 struct Wrestler {
   int id;
   vector<int> adj;
   string name;
+  int team;
+  int length;
+  bool visited;
 };
 
-void BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start);
+vector<Wrestler> BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start);
 string removeNonLetters(string str);
 
 int main(){
@@ -54,6 +61,9 @@ int main(){
       temp.id = wnum;
       temp.name = removeNonLetters(parsedRow.at(0));
       cout << temp.id << " " << temp.name << endl;
+      temp.team = NONE;
+      temp.length = 0;
+      temp.visited = false;
       wrestlers.push_back(temp);
       wnum++;
     }
@@ -88,15 +98,15 @@ int main(){
     }
   }
 
-  BreadthFirstSearch(wrestlers, W, 0)
+  wrestlers = BreadthFirstSearch(wrestlers, W, 0);
 
   cout << fileout;
 
   //Write string to file
   ofstream outfile;
-  outfile.open("act.out");
+  outfile.open("wrestlers.out");
   if (!outfile) {  //make sure the file exists
-    cout << "Unable to open act.out";
+    cout << "Unable to open wrestlers.out";
     exit(1);   // EXIT PROGRAM
   }
   outfile << fileout;
@@ -104,9 +114,31 @@ int main(){
 
 }
 
-void BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start){
+vector<Wrestler> BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start){
+  vector<int> queue;
+  wrestlers.at(start).visited = true;
+  queue.push_back(start);
+  wrestlers.at(start).length = 1;
 
+  while(!queue.empty()) {
+    int currentindex = queue.front();
+    cout << currentindex << " ";
+    queue.erase(queue.begin());
+    Wrestler current = wrestlers.at(currentindex);
+
+    for (int i = 0; i < current.adj.size(); i++) {
+      int test = current.adj.at(i);
+      if (wrestlers.at(test).visited == false) {
+        wrestlers.at(test).visited = true;
+        queue.push_back(test);
+        wrestlers.at(test).length = current.length+1;
+      }
+    }
+  }
+  return wrestlers;
 }
+
+
 
 string removeNonLetters(string str) {
   while (str.back() == '\n' || str.back() == '\r'){
