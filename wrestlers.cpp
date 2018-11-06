@@ -23,11 +23,16 @@ struct Wrestler {
 
 vector<Wrestler> BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start);
 vector<Wrestler> sortTeams(vector<Wrestler> wrestlers, int W);
+bool checkTeams(vector<Wrestler> wrestlers, int W, vector<int> rivA, vector<int> rivB);
 string removeNonLetters(string str);
 
 int main(){
+  string filename;
+  cout << "Plese enter the file you would like to load: ";
+  cin >> filename;
+
   ifstream inFile;  //set up the file reader and attempt to read the file
-  inFile.open("wrestler.txt");
+  inFile.open(filename);
   if (!inFile) {  //make sure the file exists
     cout << "Unable to open wrestler.txt" << endl;
     exit(1);   // EXIT PROGRAM
