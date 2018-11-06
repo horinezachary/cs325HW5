@@ -161,8 +161,8 @@ vector<Wrestler> sortTeams(vector<Wrestler> wrestlers, int W){
     if (wrestlers.at(i).length != 0){
       wrestlers.at(i).team = (wrestlers.at(i).length % 2) +1; //Gives 1 if the length is even, and 2 if the length is odd
     }
-    else {  //no rivalry for this wrestler, so add them to the first team.
-      wrestlers.at(i).team = BABY;
+    else {  //no rivalry for this wrestler, so add them to the last team.
+      wrestlers.at(i).team = HEEL;
     }
   }
   return wrestlers;
