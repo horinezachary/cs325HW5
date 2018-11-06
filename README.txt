@@ -11,8 +11,8 @@ A C   //the rivalries are formatted with the two participating parties separated
 B D   //
 A D   //
 
-The program will output the results both to the command line, as well as to a file named wrestlers.out
+The program will output the results both to the command line, as well as to a file named wrestler.out
 
 In order to use this program:
-Compile the program with:   g++ -o wrestlers wrestlers.cpp
-Run the program with:       ./wrestlers
+Compile the program with:   g++ -o wrestlers wrestler.cpp
+Run the program with:       ./wrestler
