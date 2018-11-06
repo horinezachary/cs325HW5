@@ -9,8 +9,8 @@
 using namespace std;
 
 const int NONE = 0;
-const int BABY = 1;
-const int HEEL = 2;
+const int HEEL = 1;
+const int BABY = 2;
 
 struct Wrestler {
   int id;
