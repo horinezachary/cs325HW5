@@ -1,0 +1,67 @@
+struct Wrestler {
+  int id;
+  vector<int> adj;
+  string name;
+  int team;
+  int length;
+  bool visited;
+};
+
+int main(numWrestlers, wrestlerNames, numRivalries, rivalriesA, rivalriesB){
+    int wnum = 0;
+    for (each wrestler){
+      Wrestler temp;
+      temp.id = wnum;
+      temp.name = wrestlerNames[wnum];
+      temp.team = NONE;
+      temp.length = 0;
+      temp.visited = false;
+      wrestlers.push_back(temp);
+      wnum++;
+    }
+    for (each rivalry){
+      int wx, wy;
+      for (i = 0 -> numWrestlers){
+        if (i.name == x){wx = i;}
+        if (i.name == y){wy = i;}
+      }
+      wrestlers[wx].adj.push_back(wy);
+      wrestlers[wy].adj.push_back(wx);
+    }
+  }
+
+  vector<int> queue;
+  start.visited = true;
+  queue.push_back(start); //add first value to the queue
+  start.length = 1;
+  while(!queue.empty()) {
+    current = queue.pop_front();
+    for (i = 0 -> current.adj.size()) {  //check if the rival has already been visited, otherwise add to the stack
+      test = current.adj[i];
+      if (test.visited is false) {
+        test.visited = true;
+        queue.push_back(test);
+        test.length = current.length+1; //add length to the rival
+      }
+    }
+  }
+  for (i = 0 -> numWrestler) {
+    if (i.length is EVEN){i.team = BABY;}
+    else {i.team = HEEL;}
+  }
+
+  for (i = 0 -> numRivalries){
+    if (wrestlers[A[i]].team == wrestlers[B[i]].team){
+      cout << "Possible: NO" << endl;
+      break;
+    }
+  }
+  cout << "Possible: YES" << endl;
+  string bstr = "BABYFACES:";
+  string hstr = "HEELS:";
+  for (int i = 0; i < numWrestlers; i++){
+    if (i.team == BABY){bstr.append(i.name);}
+    else if (i.team == HEEL){hstr.append(i.name);}
+  }
+  cout << bstr << endl << hstr << endl;
+}
