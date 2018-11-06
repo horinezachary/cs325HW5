@@ -7,6 +7,7 @@
 #include <vector>
 
 using namespace std;
+
 struct Wrestler {
   int id;
   vector<int> adj;
@@ -22,6 +23,7 @@ int main(){
   string line;
   bool firstCaseLine = true;
 
+  vector<Wrestler> wrestlers;
   int V;
   int wnum;
   int R;
@@ -38,10 +40,24 @@ int main(){
       //cout << cell;
     }
     if (firstCaseLine){  //number of wrestlers
+      V = stoi(parsedRow.at(0));
+      cout << V << endl;
+      firstCaseLine = false;
+      wnum = 0;
     }
     else if (wnum < V){  //wrestler names
+      Wrestler temp;
+      temp.id = wnum;
+      temp.name = removeNonLetters(parsedRow.at(0));
+      cout << temp.id << " " << temp.name << endl;
+      wrestlers.push_back(temp);
+      wnum++;
     }
     else if (wnum == V){//number of rivalries
+      wnum++;
+      R = stoi(parsedRow.at(0));
+      cout << R << endl;
+      rnum = 0;
     }
     else if (rnum < R) {
     }
