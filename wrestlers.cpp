@@ -22,6 +22,7 @@ struct Wrestler {
 };
 
 vector<Wrestler> BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start);
+vector<Wrestler> sortTeams(vector<Wrestler> wrestlers, int W);
 string removeNonLetters(string str);
 
 int main(){
@@ -99,6 +100,7 @@ int main(){
   }
 
   wrestlers = BreadthFirstSearch(wrestlers, W, 0);
+  wrestlers = sortTeams(wrestlers, W);
 
   cout << fileout;
 
@@ -138,7 +140,17 @@ vector<Wrestler> BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start
   return wrestlers;
 }
 
-
+vector<Wrestler> sortTeams(vector<Wrestler> wrestlers, int W){
+  for (int i = 0; i < W; i++) {
+    if (wrestlers.at(i).length != 0){
+      wrestlers.at(i).team = (wrestlers.at(i).length % 2) +1; //Gives 1 if the length is even, and 2 if the length is odd
+    }
+    else{
+      wrestlers.at(i).team = BABY;
+    }
+  }
+  return wrestlers;
+}
 
 string removeNonLetters(string str) {
   while (str.back() == '\n' || str.back() == '\r'){
