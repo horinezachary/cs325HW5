@@ -34,7 +34,7 @@ int main(){
   ifstream inFile;  //set up the file reader and attempt to read the file
   inFile.open(filename);
   if (!inFile) {  //make sure the file exists
-    cout << "Unable to open wrestler.txt" << endl;
+    cout << "Unable to open " << filename << endl;
     exit(1);   // EXIT PROGRAM
   }
   string line;
