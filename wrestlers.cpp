@@ -150,11 +150,14 @@ vector<Wrestler> BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start
 
 vector<Wrestler> sortTeams(vector<Wrestler> wrestlers, int W){
   for (int i = 0; i < W; i++) {
+    if (wrestlers.at(i).visited == false){
+      wrestlers = BreadthFirstSearch(wrestlers, W, i);
+    }
     if (wrestlers.at(i).length != 0){
       wrestlers.at(i).team = (wrestlers.at(i).length % 2) +1; //Gives 1 if the length is even, and 2 if the length is odd
     }
-    else{
-      wrestlers.at(i).team = BABY;
+    else {
+      wrestlers.at(i).team = NONE;
     }
   }
   return wrestlers;
