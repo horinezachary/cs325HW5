@@ -40,6 +40,9 @@ int main(){
   int wnum;
   int R;
   int rnum;
+  vector<int> rivA;
+  vector<int> rivB;
+
   int linecount = 1;
   string fileout = "";
   while(getline(inFile,line)){ //gets one line
@@ -93,8 +96,10 @@ int main(){
         }
         cout << endl;
       }
-      wrestlers.at(wx).adj.push_back(wrestlers.at(wy).id);
-      wrestlers.at(wy).adj.push_back(wrestlers.at(wx).id);
+      rivA.push_back(wx);
+      rivB.push_back(wy);
+      wrestlers.at(wx).adj.push_back(wy);
+      wrestlers.at(wy).adj.push_back(wx);
       rnum++;
     }
   }
@@ -102,7 +107,10 @@ int main(){
   wrestlers = BreadthFirstSearch(wrestlers, W, 0);
   wrestlers = sortTeams(wrestlers, W);
 
-  cout << fileout;
+  if (checkTeams(wrestlers, W, rivA, rivB)){
+      fileout.append("\nPossible: YES");
+  else {fileout.append("\nPossible: NO");}
+  cout << fileout << endl;
 
   //Write string to file
   ofstream outfile;
@@ -124,7 +132,7 @@ vector<Wrestler> BreadthFirstSearch(vector<Wrestler> wrestlers, int W, int start
 
   while(!queue.empty()) {
     int currentindex = queue.front();
-    cout << currentindex << " ";
+    //cout << currentindex << " ";
     queue.erase(queue.begin());
     Wrestler current = wrestlers.at(currentindex);
 
@@ -150,6 +158,16 @@ vector<Wrestler> sortTeams(vector<Wrestler> wrestlers, int W){
     }
   }
   return wrestlers;
+}
+
+bool checkTeams(vector<Wrestler> wrestlers, int W, vector<int> rivA, vector<int> rivB){
+  for (int i = 0; i < rivA.size(); i++){
+    //cout << wrestlers.at(rivA.at(i)).team << " " << wrestlers.at(rivB.at(i)).team << endl;
+    if (wrestlers.at(rivA.at(i)).team == wrestlers.at(rivB.at(i)).team){
+      return false;
+    }
+  }
+  return true;
 }
 
 string removeNonLetters(string str) {
